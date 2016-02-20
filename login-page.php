@@ -64,6 +64,7 @@ class ET_Divi_100_Custom_Login_Page {
 		add_action( 'admin_enqueue_scripts', array( $this, 'add_submenu_scripts' ) );
 		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
 		add_filter( 'login_body_class',      array( $this, 'body_class' ) );
+		add_action( 'login_footer',          array( $this, 'print_background_image' ) );
 	}
 
 	/**
@@ -87,10 +88,15 @@ class ET_Divi_100_Custom_Login_Page {
 	 */
 	function add_submenu_scripts() {
 		if ( isset( $_GET['page'] ) && $this->plugin_prefix . 'options' === $_GET['page'] ) {
+			wp_enqueue_media();
 			wp_enqueue_script( $this->plugin_prefix . 'dashboard-scripts', plugin_dir_url( __FILE__ ) . 'js/dashboard-scripts.js', array( 'jquery' ), '0.0.1', true );
-			wp_localize_script( $this->plugin_prefix . 'dashboard-scripts', $this->main_prefix, array(
-				'preview_dir_url' => plugin_dir_url( __FILE__ ) . 'preview/',
-			) );
+			wp_localize_script( $this->plugin_prefix . 'dashboard-scripts', $this->main_prefix . 'js_params', array(
+				'preview_dir_url'                 => plugin_dir_url( __FILE__ ) . 'preview/',
+				'upload_background_inactive_text' => __( 'Select Background' ),
+				'upload_background_active_text'   => __( 'Change Background' ),
+				'media_uploader_title'            => __( 'Select Image for login page background' ),
+				'media_uploader_button_text'      => __( 'Select this image' ),
+			));
 		}
 	}
 
@@ -102,21 +108,35 @@ class ET_Divi_100_Custom_Login_Page {
 		$is_option_updated         = false;
 		$is_option_updated_success = false;
 		$is_option_updated_message = '';
-		$login_page_name           = 'login-page-style';
+		$login_page_style          = 'login-page-style';
+		$login_page_background_src = 'login-page-background-media-src';
+		$login_page_background_id  = 'login-page-background-media-id';
 		$nonce_action              = $this->plugin_prefix . 'options';
 		$nonce                     = $this->plugin_prefix . 'options_nonce';
 
 		// Verify whether an update has been occured
-		if ( isset( $_POST[ $login_page_name ] ) && isset( $_POST[ $nonce ] ) ) {
+		if ( isset( $_POST[ $login_page_style ] ) && isset( $_POST[ $nonce ] ) ) {
 			$is_option_updated = true;
 
 			// Verify nonce. Thou shalt use correct nonce
 			if ( wp_verify_nonce( $_POST[ $nonce ], $nonce_action ) ) {
 
 				// Verify input
-				if ( in_array( $_POST[$login_page_name], array_keys( $this->get_styles() ) ) ) {
+				if ( in_array( $_POST[ $login_page_style ], array_keys( $this->get_styles() ) ) ) {
 					// Update option
-					update_option( $this->plugin_prefix . 'styles', sanitize_text_field( $_POST[ $login_page_name ] ) );
+					update_option( $this->plugin_prefix . 'styles', sanitize_text_field( $_POST[ $login_page_style ] ) );
+
+					if ( isset( $_POST[ $login_page_background_src ] ) && '' != $_POST[ $login_page_background_src ] ) {
+						update_option( $this->plugin_prefix . 'background_src', esc_url( $_POST[ $login_page_background_src ] ) );
+					} else {
+						delete_option( $this->plugin_prefix . 'background_src' );
+					}
+
+					if ( isset( $_POST[ $login_page_background_id ] ) && '' != $_POST[ $login_page_background_id ] ) {
+						update_option( $this->plugin_prefix . 'background_id', intval( $_POST[ $login_page_background_id ] ) );
+					} else {
+						delete_option( $this->plugin_prefix . 'background_id' );
+					}
 
 					// Update submission status & message
 					$is_option_updated_message = __( 'Your setting has been updated.' );
@@ -128,6 +148,10 @@ class ET_Divi_100_Custom_Login_Page {
 				$is_option_updated_message = __( 'Error authenticating request. Please try again.' );
 			}
 		}
+
+		// Get preview image
+		$background_src = get_option( $this->plugin_prefix . 'background_src' );
+		$background_id = get_option( $this->plugin_prefix . 'background_id' );
 
 		?>
 		<div class="wrap">
@@ -176,6 +200,30 @@ class ET_Divi_100_Custom_Login_Page {
 									<img src="<?php echo plugin_dir_url( __FILE__ ) . 'preview/style-' . $style . '.gif'; ?>">
 								<?php } ?>
 								</div>
+							</td>
+						</tr>
+
+						<tr>
+							<th scope="row">
+								<label for="login-page-background"><?php _e( 'Select Background Image' ); ?></label>
+							</th>
+							<td>
+								<input name="login-page-background-media-src" id="login-page-background-media-src" type="hidden" value="<?php echo esc_attr( $background_src ); ?>">
+
+								<input name="login-page-background-media-id" id="login-page-background-media-id" type="hidden" value="<?php echo esc_attr( $background_id ); ?>">
+
+								<p>
+									<button id="login-page-background-upload" class="button"><?php _e( 'Select Background' ); ?></button>
+									<a href="#" id="login-page-background-remove" style="margin-left: 10px; display: none;"><?php _e( 'Remove Background' ); ?></a>
+								</p>
+
+								<div class="option-preview" id="login-page-background-preview" style="width: 100%; margin-top: 20px;">
+									<?php
+										if ( $background_src && '' !== $background_src ) {
+											printf( '<img src="%s" style="%s" />', esc_attr( $background_src ), esc_attr( 'max-width: 100%;' ) );
+										}
+									?>
+								</div><!-- .option-preview -->
 							</td>
 						</tr>
 					</tbody>
@@ -244,6 +292,26 @@ class ET_Divi_100_Custom_Login_Page {
 	 */
 	function enqueue_frontend_scripts() {
 		wp_enqueue_style( 'custom-login-pages', plugin_dir_url( __FILE__ ) . 'css/style.css' );
+	}
+
+	/**
+	 * Print background image on login page
+	 * @return void
+	 */
+	function print_background_image() {
+		$background_image_src = get_option( $this->plugin_prefix . 'background_src' );
+
+		if ( $background_image_src && '' !== $background_image_src ) {
+			printf(
+				'<style type="text/css">
+					body {
+						background: url( "%s" ) center center no-repeat;
+						background-size: cover;
+					}
+				</style>',
+				esc_url( $background_image_src )
+			);
+		}
 	}
 }
 ET_Divi_100_Custom_Login_Page::instance();
