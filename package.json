@@ -1,21 +1,21 @@
 {
-  "name": "divi-100-init",
+  "name": "divi-100-login-page",
   "version": "0.0.1",
   "description": "Boiler plate for Divi 100",
-  "main": "divi-100-init.php",
+  "main": "divi-100-login-page.php",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andyhqtran/divi-100-init.git"
+    "url": "git+https://github.com/andyhqtran/divi-100-login-page.git"
   },
   "author": "Andy Tran",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/andyhqtran/divi-100-init/issues"
+    "url": "https://github.com/andyhqtran/divi-100-login-page/issues"
   },
-  "homepage": "https://github.com/andyhqtran/divi-100-init#readme",
+  "homepage": "https://github.com/andyhqtran/divi-100-login-page#readme",
   "dependencies": {
     "grunt": "^0.4.5"
   },
