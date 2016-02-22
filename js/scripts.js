@@ -5,10 +5,12 @@ jQuery(document).ready(function ($) {
     $('.input').each(function (index) {
 
       // Prepend Ion Icon
-      if (!index == 1) {
+      if ($(this).is('#user_login')) {
         $(this).parent().prepend('<span class="icon ion-person"></span>');
-      } else {
+      } else if ($(this).is('#user_pass')) {
         $(this).parent().prepend('<span class="icon ion-locked"></span>');
+      } else if ($(this).is('#user_email')) {
+        $(this).parent().prepend('<span class="icon ion-email"></span>');
       }
 
       // Add focused class to input with value
