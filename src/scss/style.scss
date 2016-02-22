@@ -1,5 +1,23 @@
 @import "modules/base";
 
+body.login {
+  font-family: "Open Sans", sans-serif;
+  font-size: rem(14);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  div#login {
+    h1 {
+      a {
+        background-image: none, url("../img/logo.svg");
+        background-size: 120px;
+        width: 120px;
+        height: 120px;
+      }
+    }
+  }
+}
+
 @import "partials/style-1";
 @import "partials/style-2";
 @import "partials/style-3";

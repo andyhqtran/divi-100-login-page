@@ -292,6 +292,8 @@ class ET_Divi_100_Custom_Login_Page {
 	 */
 	function enqueue_frontend_scripts() {
 		wp_enqueue_style( 'custom-login-pages', plugin_dir_url( __FILE__ ) . 'css/style.css' );
+		wp_enqueue_style( 'custom-login-pages-icon-font', plugin_dir_url( __FILE__ ) . 'css/ionicons.min.css' );
+		wp_enqueue_script( 'custom-login-pages-scripts', plugin_dir_url( __FILE__ ) . 'js/scripts.js', array( 'jquery'), '0.0.1', true );
 	}
 
 	/**

@@ -1,5 +1,8 @@
 @mixin style($style) {
-  #{$prefix-style + $style} {
-    @content;
+  #{".login" + $prefix-style + $style} {
+
+    div#login {
+      @content;
+    }
   }
 }
