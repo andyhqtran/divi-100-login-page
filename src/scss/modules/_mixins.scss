@@ -1,11 +1,5 @@
-@mixin type($type) {
-  #{$prefix-type + $type + " " + $prefix} {
-    @content;
-  }
-}
-
 @mixin style($style) {
-  #{$prefix-style + $style + " " + $prefix} {
+  #{$prefix-style + $style} {
     @content;
   }
 }
