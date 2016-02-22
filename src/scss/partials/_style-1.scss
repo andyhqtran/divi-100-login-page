@@ -3,6 +3,10 @@ body {
 }
 
 @include style(1) {
+  width: 380px;
+  padding: 0 20px;
+  box-sizing: border-box;
+
   h1 {
     margin: 0 0 40px;
   }
@@ -108,6 +112,7 @@ body {
 
   #nav {
     margin: -18px 0 40px;
+    color: #FFF;
     font-size: rem(12);
     font-weight: 600;
     text-align: right;
