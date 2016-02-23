@@ -7,7 +7,7 @@
     margin: 0 0 40px;
   }
 
-  form#loginform {
+  form {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -107,6 +107,10 @@
         text-shadow: none;
       }
     }
+  }
+
+  #reg_passmail {
+    color: $white;
   }
 
   #nav {
