@@ -48,6 +48,8 @@
       }
 
       &:first-child {
+        border-radius: 4px 4px 0 0;
+
         .input {
           border-radius: 4px 4px 0 0;
         }
@@ -55,6 +57,7 @@
 
       &:nth-child(2) {
         margin: 0 0 20px;
+        border-radius: 0 0 4px 4px;
 
         .input {
           margin-top: -1px;
