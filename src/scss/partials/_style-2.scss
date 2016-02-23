@@ -1,1 +1,82 @@
-@include style(2) {}
+@include style(2) {
+  form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: 0;
+    box-shadow: none;
+    padding: 0;
+
+    p {
+      &:first-child,
+      &:nth-child(2) {
+        label {
+          position: relative;
+          display: block;
+          height: 60px;
+          line-height: 60px;
+          padding: 0 20px 0;
+          box-sizing: border-box;
+          color: $white;
+          font-weight: 600;
+          font-size: rem(16);
+          overflow: hidden;
+          transition: background 0.3s ease;
+
+          .icon {
+            color: $white;
+            margin: 0 20px 0 0;
+          }
+
+          &.focused {
+            background: rgba($white, 0.1);
+            color: transparent;
+
+            .icon {
+              color: $white;
+            }
+          }
+        }
+      }
+
+      &:first-child {
+        border-radius: 4px 4px 0 0;
+
+        .input {
+          border-radius: 4px 4px 0 0;
+        }
+      }
+
+      &:nth-child(2) {
+        margin: 0 0 20px;
+        border-radius: 0 0 4px 4px;
+
+        .input {
+          margin-top: -1px;
+          border-radius: 0 0 4px 4px;
+
+          &:focus {
+            ~ {
+              background: #000;
+            }
+          }
+        }
+      }
+    }
+
+    .input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: 0;
+      border: 1px solid rgba($white, 0.3);
+      box-shadow: none;
+      margin: 0;
+      padding: 18px 20px 18px 50px;
+      box-sizing: border-box;
+      color: $white;
+      font-size: rem(16);
+      font-weight: 600;
+    }
+  }
+}

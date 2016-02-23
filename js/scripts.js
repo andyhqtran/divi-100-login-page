@@ -1,7 +1,13 @@
 jQuery(document).ready(function ($) {
+  var styleCheck = function (value) {
+    if (value) {
+      return $('.et_divi_100_custom_login_page--style-' + value).length;
+    } else {
+      return $('.et_divi_100_custom_login_page').length;
+    }
+  }
 
-  // Check for style 1 class
-  if ($('.et_divi_100_custom_login_page--style-1').length) {
+  if (styleCheck()) {
     $('.input').each(function (index) {
 
       // Prepend Ion Icon
