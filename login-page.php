@@ -280,7 +280,7 @@ class ET_Divi_100_Custom_Login_Page {
 
 		// Assign specific class to <body> if needed
 		if ( '' !== $selected_style ) {
-			$classes[] = esc_attr(  $this->plugin_prefix . '-style-' . $selected_style );
+			$classes[] = esc_attr(  $this->plugin_prefix . '-style-' . $selected_style . ' et_divi_100_custom_login_page');
 		}
 
 		return $classes;
