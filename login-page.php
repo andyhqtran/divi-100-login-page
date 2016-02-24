@@ -33,6 +33,7 @@ class ET_Divi_100_Custom_Login_Page {
 	public $plugin_id;
 	public $plugin_prefix;
 	protected $settings;
+	protected $utils;
 
 	/**
 	 * Gets the instance of the plugin
@@ -54,6 +55,7 @@ class ET_Divi_100_Custom_Login_Page {
 		$this->plugin_id     = "{$this->main_prefix}{$this->plugin_slug}";
 		$this->plugin_prefix = "{$this->plugin_id}-";
 		$this->settings      = maybe_unserialize( get_option( $this->plugin_id ) );
+		$this->utils         = new Divi_100_Utils( $this->settings );
 
 		$this->init();
 	}
@@ -128,21 +130,6 @@ class ET_Divi_100_Custom_Login_Page {
 	}
 
 	/**
-	 * Get value
-	 *
-	 * @param string key
-	 * @param mixed default value
-	 * @return mixed
-	 */
-	function get_value( $key, $default = '' ) {
-		if ( isset( $this->settings[ $key ] ) ) {
-			return $this->settings[ $key ];
-		}
-
-		return $default;
-	}
-
-	/**
 	 * List of valid styles
 	 * @return void
 	 */
@@ -164,7 +151,7 @@ class ET_Divi_100_Custom_Login_Page {
 	 * @return string
 	 */
 	function get_selected_style() {
-		$style = $this->get_value( 'style', '' );
+		$style = $this->utils->get_value( 'style', '' );
 
 		return apply_filters( $this->plugin_prefix . 'get_selected_style', $style );
 	}
@@ -199,7 +186,7 @@ class ET_Divi_100_Custom_Login_Page {
 	 * Modify login logo url
 	 */
 	function modify_login_logo_url( $url ) {
-		$custom_url = $this->get_value( 'logo-url', false );
+		$custom_url = $this->utils->get_value( 'logo-url', false );
 
 		if ( $custom_url && '' !== $custom_url ) {
 			$url = esc_url( $custom_url );
@@ -213,9 +200,9 @@ class ET_Divi_100_Custom_Login_Page {
 	 * @return void
 	 */
 	function print_background_image() {
-		$background_image_src = $this->get_value( 'background-image', '' );
-		$logo_image_src       = $this->get_value( 'logo-image', '' );
-		$login_color          = $this->get_value( 'login-color', '' );
+		$background_image_src = $this->utils->get_value( 'background-image', '' );
+		$logo_image_src       = $this->utils->get_value( 'logo-image', '' );
+		$login_color          = $this->utils->get_value( 'login-color', '' );
 
 		if ( $background_image_src && '' !== $background_image_src ) {
 			printf(
