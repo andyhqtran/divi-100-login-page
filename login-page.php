@@ -57,7 +57,10 @@ class ET_Divi_100_Custom_Login_Page {
 		$this->settings      = maybe_unserialize( get_option( $this->plugin_id ) );
 		$this->utils         = new Divi_100_Utils( $this->settings );
 
-		$this->init();
+		// Initialize if Divi is active
+		if ( et_divi_100_is_active() ) {
+			$this->init();
+		}
 	}
 
 	/**
