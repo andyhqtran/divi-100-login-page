@@ -26,14 +26,10 @@ nbproject
 # Sass Cache
 .sass-cache
 
-# Temp. Folder
+# Temp.
 .tmp
 .build
-
-# Files
-*.css
 *.map
-*.html
 
 # Folders
 components
