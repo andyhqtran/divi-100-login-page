@@ -16,9 +16,77 @@
 */
 
 /**
- * Load Divi 100 Setup
+ * Register plugin to Divi 100 list
  */
-require_once( plugin_dir_path( __FILE__ ) . '/divi-100-setup/divi-100-setup.php' );
+class ET_Divi_100_Custom_Login_Page_Config {
+	public static $instance;
+
+	/**
+	 * Hook the plugin info into Divi 100 list
+	 */
+	function __construct() {
+		add_filter( 'et_divi_100_settings', array( $this, 'register' ) );
+		add_action( 'plugins_loaded',       array( $this, 'init' ) );
+	}
+
+	/**
+	* Gets the instance of the plugin
+	*/
+	public static function instance(){
+		if ( null === self::$instance ){
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
+	 * Define plugin info
+	 *
+	 * @return array plugin info
+	 */
+	public static function info() {
+		$main_prefix = 'et_divi_100_';
+		$plugin_slug = 'custom_login_page';
+
+		return array(
+			'main_prefix'        => $main_prefix,
+			'plugin_name'        => __( 'Custom Login Page' ),
+			'plugin_description' => __( 'Nullam quis risus eget urna mollis ornare vel eu leo.' ),
+			'plugin_slug'        => $plugin_slug,
+			'plugin_id'          => "{$main_prefix}{$plugin_slug}",
+			'plugin_prefix'      => "{$main_prefix}{$plugin_slug}-",
+			'plugin_version'     => 20160301,
+			'plugin_dir_path'    => plugin_dir_path( __FILE__ ),
+		);
+	}
+
+	/**
+	 * et_divi_100_settings callback
+	 *
+	 * @param array  settings
+	 * @return array settings
+	 */
+	function register( $settings ) {
+		$info = self::info();
+
+		$settings[ $info['plugin_slug'] ] = $info;
+
+		return $settings;
+	}
+
+	/**
+	 * Init plugin after all plugins has been loaded
+	 */
+	function init() {
+		// Load Divi 100 Setup
+		require_once( plugin_dir_path( __FILE__ ) . 'divi-100-setup/divi-100-setup.php' );
+
+		// Load Login Page
+		ET_Divi_100_Custom_Login_Page::instance();
+	}
+}
+ET_Divi_100_Custom_Login_Page_Config::instance();
 
 /**
  * Load Custom Login Page
@@ -28,10 +96,7 @@ class ET_Divi_100_Custom_Login_Page {
 	 * Unique instance of plugin
 	 */
 	public static $instance;
-	public $main_prefix;
-	public $plugin_slug;
-	public $plugin_id;
-	public $plugin_prefix;
+	public $config;
 	protected $settings;
 	protected $utils;
 
@@ -50,12 +115,9 @@ class ET_Divi_100_Custom_Login_Page {
 	 * Constructor
 	 */
 	private function __construct(){
-		$this->main_prefix   = 'et_divi_100_';
-		$this->plugin_slug   = 'custom_login_page';
-		$this->plugin_id     = "{$this->main_prefix}{$this->plugin_slug}";
-		$this->plugin_prefix = "{$this->plugin_id}-";
-		$this->settings      = maybe_unserialize( get_option( $this->plugin_id ) );
-		$this->utils         = new Divi_100_Utils( $this->settings );
+		$this->config   = ET_Divi_100_Custom_Login_Page_Config::info();
+		$this->settings = maybe_unserialize( get_option( $this->config['plugin_id'] ) );
+		$this->utils    = new Divi_100_Utils( $this->settings );
 
 		// Initialize if Divi is active
 		if ( et_divi_100_is_active() ) {
@@ -76,7 +138,7 @@ class ET_Divi_100_Custom_Login_Page {
 
 		if ( is_admin() ) {
 			$settings_args = array(
-				'plugin_id'   => $this->plugin_id,
+				'plugin_id'   => $this->config['plugin_id'],
 				'title'       => __( 'Custom Login Page' ),
 				'description' => __( 'Nullam quis risus eget urna mollis ornare vel eu leo.' ),
 				'fields'      => array(
@@ -137,7 +199,7 @@ class ET_Divi_100_Custom_Login_Page {
 	 * @return void
 	 */
 	function get_styles() {
-		return apply_filters( $this->plugin_prefix . 'styles', array(
+		return apply_filters( $this->config['plugin_prefix'] . 'styles', array(
 			''  => __( 'Default' ),
 			'1' => __( 'One' ),
 			'2' => __( 'Two' ),
@@ -156,7 +218,7 @@ class ET_Divi_100_Custom_Login_Page {
 	function get_selected_style() {
 		$style = $this->utils->get_value( 'style', '' );
 
-		return apply_filters( $this->plugin_prefix . 'get_selected_style', $style );
+		return apply_filters( $this->config['plugin_prefix'] . 'get_selected_style', $style );
 	}
 
 	/**
@@ -169,7 +231,7 @@ class ET_Divi_100_Custom_Login_Page {
 
 		// Assign specific class to <body> if needed
 		if ( '' !== $selected_style ) {
-			$classes[] = esc_attr(  $this->plugin_prefix . '-style-' . $selected_style . ' et_divi_100_custom_login_page');
+			$classes[] = esc_attr(  $this->config['plugin_prefix'] . '-style-' . $selected_style . ' et_divi_100_custom_login_page');
 		}
 
 		return $classes;
@@ -180,9 +242,9 @@ class ET_Divi_100_Custom_Login_Page {
 	 * @return void
 	 */
 	function enqueue_frontend_scripts() {
-		wp_enqueue_style( 'custom-login-pages', plugin_dir_url( __FILE__ ) . 'assets/css/style.css' );
-		wp_enqueue_style( 'custom-login-pages-icon-font', plugin_dir_url( __FILE__ ) . 'assets/css/ionicons.min.css' );
-		wp_enqueue_script( 'custom-login-pages-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/scripts.js', array( 'jquery'), '0.0.1', true );
+		wp_enqueue_style( 'custom-login-pages', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', array(), $this->config['plugin_version'] );
+		wp_enqueue_style( 'custom-login-pages-icon-font', plugin_dir_url( __FILE__ ) . 'assets/css/ionicons.min.css', array(), $this->config['plugin_version'] );
+		wp_enqueue_script( 'custom-login-pages-scripts', plugin_dir_url( __FILE__ ) . 'assets/js/scripts.js', array( 'jquery'), $this->config['plugin_version'], true );
 	}
 
 	/**
@@ -247,4 +309,3 @@ class ET_Divi_100_Custom_Login_Page {
 		}
 	}
 }
-ET_Divi_100_Custom_Login_Page::instance();
