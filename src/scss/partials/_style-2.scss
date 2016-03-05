@@ -10,31 +10,29 @@
     p {
       &:first-child,
       &:nth-child(2) {
+        order: 1;
+
         label {
           position: relative;
           display: block;
           height: 60px;
           line-height: 60px;
+          background: $white;
           padding: 0 20px 0;
           box-sizing: border-box;
-          color: $white;
-          font-weight: 600;
+          color: #8E8E92;
+          font-weight: 400;
           font-size: rem(16);
           overflow: hidden;
           transition: background 0.3s ease;
 
           .icon {
-            color: $white;
+            color: #8E8E92;
             margin: 0 20px 0 0;
           }
 
           &.focused {
-            background: rgba($white, 0.1);
             color: transparent;
-
-            .icon {
-              color: $white;
-            }
           }
         }
       }
@@ -48,7 +46,6 @@
       }
 
       &:nth-child(2) {
-        margin: 0 0 20px;
         border-radius: 0 0 4px 4px;
 
         .input {
@@ -60,6 +57,28 @@
               background: #000;
             }
           }
+        }
+      }
+
+      &.forgetmenot {
+        order: 3;
+      }
+
+      &.submit {
+        order: 2;
+        margin: 0 0 20px;
+
+        #wp-submit {
+          width: 100%;
+          height: auto;
+          border: 0;
+          border-radius: 0;
+          padding: 12px 20px;
+          box-shadow: none;
+          box-sizing: border-box;
+          font-size: rem(18);
+          font-weight: 600;
+          text-shadow: none;
         }
       }
     }
@@ -74,9 +93,49 @@
       margin: 0;
       padding: 18px 20px 18px 50px;
       box-sizing: border-box;
-      color: $white;
+      color: #8E8E92;
       font-size: rem(16);
       font-weight: 600;
+    }
+  }
+
+  #nav {
+    margin: -18px 0 40px;
+    padding: 0;
+    color: #FFF;
+    font-size: rem(12);
+    font-weight: 600;
+    text-align: right;
+
+    a {
+      color: rgba($white, 0.8);
+
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .forgetmenot {
+    display: block;
+    order: 2;
+    width: 100%;
+
+    label {
+      color: rgba($white, 0.8);
+      font-weight: 600;
+
+      &:hover {
+        color: $white;
+      }
+
+      input {
+        background: $white;
+        border: 0;
+        border-radius: 2px;
+        box-shadow: none;
+        border-radius: 2px;
+      }
     }
   }
 }

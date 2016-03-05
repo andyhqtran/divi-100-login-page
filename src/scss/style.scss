@@ -16,6 +16,20 @@ body.login {
       }
     }
   }
+
+  #backtoblog {
+    position: fixed;
+    top: 40px;
+    left: 40px;
+    margin: 0;
+    padding: 0;
+
+    a {
+      color: $white;
+      font-size: rem(18);
+      font-weight: 600;
+    }
+  }
 }
 
 @import "partials/style-1";

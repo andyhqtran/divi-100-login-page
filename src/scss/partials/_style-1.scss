@@ -132,7 +132,7 @@
     label {
       color: $white;
       font-weight: 600;
-      color: $white;
+      font-size: rem(12);
 
       input {
         background: rgba($white, 0.1);
@@ -141,20 +141,6 @@
         box-shadow: none;
         border-radius: 2px;
       }
-    }
-  }
-
-  #backtoblog {
-    position: fixed;
-    top: 40px;
-    left: 40px;
-    margin: 0;
-    padding: 0;
-
-    a {
-      color: $white;
-      font-size: rem(18);
-      font-weight: 600;
     }
   }
 }
