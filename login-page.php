@@ -191,7 +191,13 @@ class ET_Divi_100_Custom_Login_Page {
 						'button_inactive_text' => __( 'Select Background' ),
 						'button_remove_text'   => __( 'Remove Background' ),
 						'sanitize_callback'    => 'esc_url',
-					)
+					),
+					array(
+						'type'                 => 'color',
+						'id'                   => 'button-text-color',
+						'label'                => __( 'Select Button Text Color' ),
+						'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
+					),
 				),
 				'button_save_text' => __( 'Save Changes' ),
 			);
@@ -275,6 +281,7 @@ class ET_Divi_100_Custom_Login_Page {
 		$background_color     = $this->utils->get_value( 'background-color', '' );
 		$logo_image_src       = $this->utils->get_value( 'logo-image', '' );
 		$login_color          = $this->utils->get_value( 'login-color', '' );
+		$button_text_color    = $this->utils->get_value( 'button-text-color', '' );
 		$print_css_status     = false;
 		$css                  = '<style type="text/css">';
 
@@ -314,13 +321,24 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $login_color && '' !== $login_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'.wp-core-ui .button-primary{
+				'.wp-core-ui .button-primary,
+				.wp-core-ui .button-primary:hover{
 					background-color: %1$s;
 					border-color: %1$s;
 					box-shadow: none;
 					text-shadow: none;
 				}',
 				et_divi_100_sanitize_alpha_color( $login_color )
+			);
+		}
+
+		if ( $button_text_color && '' !== $button_text_color ) {
+			$print_css_status = true;
+			$css .= sprintf(
+				'.wp-core-ui .button-primary{
+					color: %1$s;
+				}',
+				et_divi_100_sanitize_alpha_color( $button_text_color )
 			);
 		}
 
