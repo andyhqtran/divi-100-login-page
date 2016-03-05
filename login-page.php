@@ -56,7 +56,7 @@ class ET_Divi_100_Custom_Login_Page_Config {
 			'plugin_slug'        => $plugin_slug,
 			'plugin_id'          => "{$main_prefix}{$plugin_slug}",
 			'plugin_prefix'      => "{$main_prefix}{$plugin_slug}-",
-			'plugin_version'     => 20160301,
+			'plugin_version'     => 20160305,
 			'plugin_dir_path'    => plugin_dir_path( __FILE__ ),
 		);
 	}
@@ -132,7 +132,7 @@ class ET_Divi_100_Custom_Login_Page {
 	 */
 	private function init(){
 		add_filter( 'login_body_class',      array( $this, 'body_class' ) );
-		add_action( 'login_footer',          array( $this, 'print_background_image' ) );
+		add_action( 'login_footer',          array( $this, 'print_styles' ) );
 		add_filter( 'login_headerurl',       array( $this, 'modify_login_logo_url' ) );
 		add_action( 'login_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
 
@@ -141,69 +141,76 @@ class ET_Divi_100_Custom_Login_Page {
 				'plugin_id'   => $this->config['plugin_id'],
 				'title'       => __( 'Custom Login Page' ),
 				'description' => __( 'Nullam quis risus eget urna mollis ornare vel eu leo.' ),
-				'fields'      => array(
-					array(
-						'type'                 => 'select',
-						'preview_prefix'       => 'style-',
-						'preview_height'       => 182,
-						'id'                   => 'style',
-						'label'                => __( 'Select Style' ),
-						'description'          => __( 'Proper description goes here' ),
-						'options'              => $this->get_styles(),
-						'sanitize_callback'    => 'sanitize_text_field',
-					),
-					array(
-						'type'                 => 'color',
-						'id'                   => 'login-color',
-						'label'                => __( 'Select Login Color' ),
-						'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
-					),
-					array(
-						'type'                 => 'upload',
-						'id'                   => 'logo-image',
-						'label'                => __( 'Select Logo Image' ),
-						'description'          => __( 'Proper description goes here' ),
-						'button_active_text'   => __( 'Change Logo' ),
-						'button_inactive_text' => __( 'Select Logo' ),
-						'button_remove_text'   => __( 'Remove Logo' ),
-						'sanitize_callback'    => 'esc_url',
-					),
-					array(
-						'type'                 => 'url',
-						'id'                   => 'logo-url',
-						'label'                => __( 'Logo URL' ),
-						'placeholder'          => 'http://wordpress.org',
-						'description'          => __( 'Proper description goes here' ),
-						'sanitize_callback'    => 'esc_url',
-					),
-					array(
-						'type'                 => 'color',
-						'id'                   => 'background-color',
-						'label'                => __( 'Select Background Color' ),
-						'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
-					),
-					array(
-						'type'                 => 'upload',
-						'id'                   => 'background-image',
-						'label'                => __( 'Select Background Image' ),
-						'description'          => __( 'Proper description goes here' ),
-						'button_active_text'   => __( 'Change Background' ),
-						'button_inactive_text' => __( 'Select Background' ),
-						'button_remove_text'   => __( 'Remove Background' ),
-						'sanitize_callback'    => 'esc_url',
-					),
-					array(
-						'type'                 => 'color',
-						'id'                   => 'button-text-color',
-						'label'                => __( 'Select Button Text Color' ),
-						'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
-					),
-				),
+				'fields'      => $this->setting_fields(),
 				'button_save_text' => __( 'Save Changes' ),
 			);
 
 			new Divi_100_Settings( $settings_args );
 		}
+	}
+
+	private function setting_fields() {
+		return array(
+			'style' => array(
+				'type'                 => 'select',
+				'preview_prefix'       => 'style-',
+				'preview_height'       => 182,
+				'id'                   => 'style',
+				'label'                => __( 'Select Style' ),
+				'description'          => __( 'Proper description goes here' ),
+				'options'              => $this->get_styles(),
+				'sanitize_callback'    => 'sanitize_text_field',
+			),
+			'login-color' => array(
+				'type'                 => 'color',
+				'id'                   => 'login-color',
+				'label'                => __( 'Select Login Color' ),
+				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
+				'default'              => '#0085ba',
+			),
+			'logo-image' => array(
+				'type'                 => 'upload',
+				'id'                   => 'logo-image',
+				'label'                => __( 'Select Logo Image' ),
+				'description'          => __( 'Proper description goes here' ),
+				'button_active_text'   => __( 'Change Logo' ),
+				'button_inactive_text' => __( 'Select Logo' ),
+				'button_remove_text'   => __( 'Remove Logo' ),
+				'sanitize_callback'    => 'esc_url',
+			),
+			'logo-url' => array(
+				'type'                 => 'url',
+				'id'                   => 'logo-url',
+				'label'                => __( 'Logo URL' ),
+				'placeholder'          => 'http://wordpress.org',
+				'description'          => __( 'Proper description goes here' ),
+				'sanitize_callback'    => 'esc_url',
+			),
+			'background-color' => array(
+				'type'                 => 'color',
+				'id'                   => 'background-color',
+				'label'                => __( 'Select Background Color' ),
+				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
+				'default'              => '#f1f1f1',
+			),
+			'background-image' => array(
+				'type'                 => 'upload',
+				'id'                   => 'background-image',
+				'label'                => __( 'Select Background Image' ),
+				'description'          => __( 'Proper description goes here' ),
+				'button_active_text'   => __( 'Change Background' ),
+				'button_inactive_text' => __( 'Select Background' ),
+				'button_remove_text'   => __( 'Remove Background' ),
+				'sanitize_callback'    => 'esc_url',
+			),
+			'button-text-color' => array(
+				'type'                 => 'color',
+				'id'                   => 'button-text-color',
+				'label'                => __( 'Select Button Text Color' ),
+				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
+				'default'              => '#ffffff',
+			),
+		);
 	}
 
 	/**
@@ -276,7 +283,8 @@ class ET_Divi_100_Custom_Login_Page {
 	 * Print background image on login page
 	 * @return void
 	 */
-	function print_background_image() {
+	function print_styles() {
+		$setting_fields       = $this->setting_fields();
 		$background_image_src = $this->utils->get_value( 'background-image', '' );
 		$background_color     = $this->utils->get_value( 'background-color', '' );
 		$logo_image_src       = $this->utils->get_value( 'logo-image', '' );
@@ -285,7 +293,7 @@ class ET_Divi_100_Custom_Login_Page {
 		$print_css_status     = false;
 		$css                  = '<style type="text/css">';
 
-		if ( $background_color && '' !== $background_color ) {
+		if ( $background_color && '' !== $background_color && $setting_fields['background-color']['default'] !== $background_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
 				'body {
@@ -318,7 +326,7 @@ class ET_Divi_100_Custom_Login_Page {
 			);
 		}
 
-		if ( $login_color && '' !== $login_color ) {
+		if ( $login_color && '' !== $login_color && $setting_fields['login-color']['default'] !== $login_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
 				'.wp-core-ui .button-primary,
@@ -332,7 +340,7 @@ class ET_Divi_100_Custom_Login_Page {
 			);
 		}
 
-		if ( $button_text_color && '' !== $button_text_color ) {
+		if ( $button_text_color && '' !== $button_text_color && $setting_fields['button-text-color']['default'] !== $button_text_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
 				'.wp-core-ui .button-primary{
