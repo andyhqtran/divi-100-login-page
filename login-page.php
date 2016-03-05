@@ -177,6 +177,12 @@ class ET_Divi_100_Custom_Login_Page {
 						'sanitize_callback'    => 'esc_url',
 					),
 					array(
+						'type'                 => 'color',
+						'id'                   => 'background-color',
+						'label'                => __( 'Select Background Color' ),
+						'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
+					),
+					array(
 						'type'                 => 'upload',
 						'id'                   => 'background-image',
 						'label'                => __( 'Select Background Image' ),
@@ -266,46 +272,62 @@ class ET_Divi_100_Custom_Login_Page {
 	 */
 	function print_background_image() {
 		$background_image_src = $this->utils->get_value( 'background-image', '' );
+		$background_color     = $this->utils->get_value( 'background-color', '' );
 		$logo_image_src       = $this->utils->get_value( 'logo-image', '' );
 		$login_color          = $this->utils->get_value( 'login-color', '' );
+		$print_css_status     = false;
+		$css                  = '<style type="text/css">';
+
+		if ( $background_color && '' !== $background_color ) {
+			$print_css_status = true;
+			$css .= sprintf(
+				'body {
+					background-color: %s;
+				}',
+				esc_url( $background_color )
+			);
+		}
 
 		if ( $background_image_src && '' !== $background_image_src ) {
-			printf(
-				'<style type="text/css">
-					body {
-						background: url( "%s" ) center center no-repeat;
-						background-size: cover;
-					}
-				</style>',
+			$print_css_status = true;
+			$css .= sprintf(
+				'body {
+					background: url( "%s" ) center center no-repeat;
+					background-size: cover;
+				}',
 				esc_url( $background_image_src )
 			);
 		}
 
 		if ( $logo_image_src && '' !== $logo_image_src ) {
-			printf(
-				'<style type="text/css">
-					#login h1 a {
-						background: url( "%s" ) center center no-repeat;
-						background-size: cover;
-						background-position: center center;
-					}
-				</style>',
+			$print_css_status = true;
+			$css .= sprintf(
+				'#login h1 a {
+					background: url( "%s" ) center center no-repeat;
+					background-size: cover;
+					background-position: center center;
+				}',
 				esc_url( $logo_image_src )
 			);
 		}
 
 		if ( $login_color && '' !== $login_color ) {
-			printf(
-				'<style type="text/css">
-					.wp-core-ui .button-primary{
-						background-color: %1$s;
-						border-color: %1$s;
-						box-shadow: none;
-						text-shadow: none;
-					}
-				</style>',
+			$print_css_status = true;
+			$css .= sprintf(
+				'.wp-core-ui .button-primary{
+					background-color: %1$s;
+					border-color: %1$s;
+					box-shadow: none;
+					text-shadow: none;
+				}',
 				et_divi_100_sanitize_alpha_color( $login_color )
 			);
+		}
+
+		$css .= '</style>';
+
+		if ( $print_css_status ) {
+			echo $css;
 		}
 	}
 }
