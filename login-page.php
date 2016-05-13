@@ -139,6 +139,7 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( is_admin() ) {
 			$settings_args = array(
 				'plugin_id'   => $this->config['plugin_id'],
+				'preview_dir_url' => plugin_dir_url( __FILE__ ) . 'preview/',
 				'title'       => __( 'Custom Login Page' ),
 				'description' => __( 'Nullam quis risus eget urna mollis ornare vel eu leo.' ),
 				'fields'      => $this->setting_fields(),
