@@ -161,14 +161,6 @@ class ET_Divi_100_Custom_Login_Page {
 				'options'              => $this->get_styles(),
 				'sanitize_callback'    => 'sanitize_text_field',
 			),
-			'login-color' => array(
-				'type'                 => 'color',
-				'id'                   => 'login-color',
-				'label'                => __( 'Select Login Color' ),
-				'description'          => __( 'Use custom color accent for your login screen' ),
-				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
-				'default'              => '#0085ba',
-			),
 			'background-color' => array(
 				'type'                 => 'color',
 				'id'                   => 'background-color',
@@ -205,11 +197,19 @@ class ET_Divi_100_Custom_Login_Page {
 				'description'          => __( 'Use your own URL for logo on login screen' ),
 				'sanitize_callback'    => 'esc_url',
 			),
+			'button-background-color' => array(
+				'type'                 => 'color',
+				'id'                   => 'button-background-color',
+				'label'                => __( 'Select Button Background Color' ),
+				'description'          => __( 'Use custom color for background button' ),
+				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
+				'default'              => '#0085ba',
+			),
 			'button-text-color' => array(
 				'type'                 => 'color',
 				'id'                   => 'button-text-color',
 				'label'                => __( 'Select Button Text Color' ),
-				'description'          => __( 'Use custom color for your login screen text button' ),
+				'description'          => __( 'Use custom color text button' ),
 				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
 				'default'              => '#ffffff',
 			),
@@ -291,7 +291,7 @@ class ET_Divi_100_Custom_Login_Page {
 		$background_image_src = $this->utils->get_value( 'background-image', '' );
 		$background_color     = $this->utils->get_value( 'background-color', '' );
 		$logo_image_src       = $this->utils->get_value( 'logo-image', '' );
-		$login_color          = $this->utils->get_value( 'login-color', '' );
+		$button_background_color = $this->utils->get_value( 'button-background-color', '' );
 		$button_text_color    = $this->utils->get_value( 'button-text-color', '' );
 		$print_css_status     = false;
 		$css                  = '<style type="text/css">';
@@ -329,7 +329,7 @@ class ET_Divi_100_Custom_Login_Page {
 			);
 		}
 
-		if ( $login_color && '' !== $login_color && $setting_fields['login-color']['default'] !== $login_color ) {
+		if ( $button_background_color && '' !== $button_background_color && $setting_fields['button-background-color']['default'] !== $button_background_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
 				'.et_divi_100_custom_login_page--style-1 .divi-login__submit input.button,
@@ -339,7 +339,7 @@ class ET_Divi_100_Custom_Login_Page {
 					box-shadow: none !important;
 					text-shadow: none !important;
 				}',
-				et_divi_100_sanitize_alpha_color( $login_color )
+				et_divi_100_sanitize_alpha_color( $button_background_color )
 			);
 		}
 
