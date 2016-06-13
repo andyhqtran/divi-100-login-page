@@ -299,7 +299,7 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $background_color && '' !== $background_color && $setting_fields['background-color']['default'] !== $background_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'body {
+				'html, body {
 					background-color: %s !important;
 				}',
 				esc_url( $background_color )
@@ -311,7 +311,7 @@ class ET_Divi_100_Custom_Login_Page {
 			$css .= sprintf(
 				'body {
 					background: url( "%s" ) center center no-repeat;
-					background-size: cover;
+					background-size: cover !important;
 				}',
 				esc_url( $background_image_src )
 			);
@@ -321,9 +321,9 @@ class ET_Divi_100_Custom_Login_Page {
 			$print_css_status = true;
 			$css .= sprintf(
 				'#login h1 a {
-					background: url( "%s" ) center center no-repeat;
-					background-size: cover;
-					background-position: center center;
+					background: url( "%s" ) center center no-repeat !important;
+					background-size: cover !important;
+					background-position: center center !important;
 				}',
 				esc_url( $logo_image_src )
 			);
@@ -334,10 +334,10 @@ class ET_Divi_100_Custom_Login_Page {
 			$css .= sprintf(
 				'.wp-core-ui .button-primary,
 				.wp-core-ui .button-primary:hover{
-					background-color: %1$s;
-					border-color: %1$s;
-					box-shadow: none;
-					text-shadow: none;
+					background-color: %1$s !important;
+					border-color: %1$s !important;
+					box-shadow: none !important;
+					text-shadow: none !important;
 				}',
 				et_divi_100_sanitize_alpha_color( $login_color )
 			);
@@ -347,7 +347,7 @@ class ET_Divi_100_Custom_Login_Page {
 			$print_css_status = true;
 			$css .= sprintf(
 				'.wp-core-ui .button-primary{
-					color: %1$s;
+					color: %1$s !important;
 				}',
 				et_divi_100_sanitize_alpha_color( $button_text_color )
 			);

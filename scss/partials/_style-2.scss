@@ -1,3 +1,7 @@
+.et_divi_100_custom_login_page--style-2 {
+  background: #5A5A62;
+}
+
 @include style(2) {
   form {
     display: flex;
@@ -69,6 +73,7 @@
         margin: 0 0 20px;
 
         #wp-submit {
+          background: #FE3367;
           width: 100%;
           height: auto;
           border: 0;
