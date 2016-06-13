@@ -310,7 +310,7 @@ class ET_Divi_100_Custom_Login_Page {
 			$print_css_status = true;
 			$css .= sprintf(
 				'body {
-					background: url( "%s" ) center center no-repeat;
+					background: url( "%s" ) center center no-repeat !important;
 					background-size: cover !important;
 				}',
 				esc_url( $background_image_src )
