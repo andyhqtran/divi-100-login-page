@@ -139,7 +139,7 @@ class ET_Divi_100_Custom_Login_Page {
 			$settings_args = array(
 				'plugin_id'   => $this->config['plugin_id'],
 				'plugin_slug' => $this->config['plugin_slug'],
-				'preview_dir_url' => plugin_dir_url( __FILE__ ) . 'preview/',
+				'preview_dir_url' => plugin_dir_url( __FILE__ ) . 'assets/img/preview/',
 				'title'       => __( 'Custom Login Page' ),
 				'fields'      => $this->setting_fields(),
 				'button_save_text' => __( 'Save Changes' ),
@@ -300,7 +300,7 @@ class ET_Divi_100_Custom_Login_Page {
 			$print_css_status = true;
 			$css .= sprintf(
 				'body {
-					background-color: %s;
+					background-color: %s !important;
 				}',
 				esc_url( $background_color )
 			);
