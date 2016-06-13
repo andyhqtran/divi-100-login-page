@@ -1,151 +1,52 @@
 .et_divi_100_custom_login_page--style-1 {
   background: #D8634F;
-}
 
-@include style(1) {
-  width: 380px;
-  padding: 8% 20px 0;
-  box-sizing: border-box;
-
-  h1 {
-    margin: 0 0 40px;
-  }
-
-  form {
+  .divi-login {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    background: 0;
-    box-shadow: none;
-    padding: 0;
 
-    p {
-      &:first-child,
-      &:nth-child(2) {
-        label {
-          position: relative;
-          display: block;
-          height: 60px;
-          line-height: 60px;
-          padding: 0 20px 0;
-          box-sizing: border-box;
-          color: $white;
-          font-weight: 600;
-          font-size: rem(16);
-          overflow: hidden;
-          transition: background 0.3s ease;
+    &__input {
+      width: 100%;
+      border: 1px solid rgba(#FFF, 0.2);
 
-          .icon {
-            color: $white;
-            margin: 0 20px 0 0;
-          }
-
-          &.focused {
-            background: rgba($white, 0.1);
-            color: transparent;
-
-            .icon {
-              color: $white;
-            }
-          }
-        }
-      }
-
-      &:first-child {
+      &:first-of-type {
         border-radius: 4px 4px 0 0;
-
-        .input {
-          border-radius: 4px 4px 0 0;
-        }
       }
 
-      &:nth-child(2) {
-        margin: 0 0 20px;
+      &:last-of-type {
+        border-top: 0;
         border-radius: 0 0 4px 4px;
+        margin: -1px 0 20px;
+      }
 
-        .input {
-          margin-top: -1px;
-          border-radius: 0 0 4px 4px;
-
-          &:focus {
-            ~ {
-              background: #000;
-            }
-          }
-        }
+      &.focused {
+        background: rgba(#FFF, 0.2);
       }
     }
 
-    .input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: 0;
-      border: 1px solid rgba($white, 0.3);
-      box-shadow: none;
-      margin: 0;
-      padding: 18px 20px 18px 50px;
-      box-sizing: border-box;
-      color: $white;
-      font-size: rem(16);
-      font-weight: 600;
-    }
-
-    .submit {
+    &__submit {
       display: block;
-      width: 80%;
-      margin: 0 auto 40px;
-      float: none;
+      width: 100%;
 
-      #wp-submit {
+      input.button {
+        display: block;
         background: #FFFFFF;
-        width: 100%;
+        width: 80%;
         height: auto;
+        margin: 0 auto;
         padding: 12px 20px;
         border: 0;
         box-shadow: none;
         box-sizing: border-box;
         color: #D8634F;
-        font-size: rem(18);
+        font-size: 18px;
         font-weight: 600;
         text-shadow: none;
       }
     }
-  }
 
-  #reg_passmail {
-    color: $white;
-  }
-
-  #nav {
-    margin: -18px 0 40px;
-    color: #FFF;
-    font-size: rem(12);
-    font-weight: 600;
-    text-align: right;
-
-    a {
-      color: $white;
-    }
-  }
-
-  .forgetmenot {
-    display: block;
-    order: 2;
-    width: 100%;
-
-    label {
-      color: $white;
-      font-weight: 600;
-      font-size: rem(12);
-
-      input {
-        background: rgba($white, 0.1);
-        border: 1px solid rgba($white, 0.3);
-        border-radius: 2px;
-        box-shadow: none;
-        border-radius: 2px;
-      }
+    &__remember {
+      margin-bottom: 20px !important;
     }
   }
 }

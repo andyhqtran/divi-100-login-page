@@ -1,23 +1,42 @@
 @import "modules/base";
 
-body.login {
+.et_divi_100_custom_login_page--style-1,
+.et_divi_100_custom_login_page--style-2,
+.et_divi_100_custom_login_page--style-3,
+.et_divi_100_custom_login_page--style-4,
+.et_divi_100_custom_login_page--style-5,
+.et_divi_100_custom_login_page--style-6,
+.et_divi_100_custom_login_page--style-7, {
+  height: auto;
+  min-height: 100%;
   font-family: "Open Sans", sans-serif;
   font-size: rem(14);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  #login_error {
+    border: 0;
+    border-radius: 4px;
+    box-shadow: none;
+    margin: 0 0 40px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
   div#login {
-    h1 {
-      a {
-        background-image: none, url("../img/logo.svg");
-        background-size: 120px;
-        width: 120px;
-        height: 120px;
-      }
+    width: 100%;
+    max-width: 360px;
+
+    h1 a {
+      background-image: none, url("../img/logo.svg");
+      background-size: 120px;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 40px;
     }
   }
 
-  #backtoblog {
+  p#backtoblog {
     position: fixed;
     top: 40px;
     left: 40px;
@@ -28,6 +47,84 @@ body.login {
       color: $white;
       font-size: rem(18);
       font-weight: 600;
+
+      &:focus,
+      &:hover {
+        color: $white;
+      }
+    }
+  }
+
+  .divi-login {
+    background: 0;
+    box-shadow: none;
+    margin: 0 0 20px;
+    padding: 0;
+
+    &__input {
+      position: relative;
+      color: #FFF;
+
+      .icon {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        color: inherit;
+        font-size: 24px;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      input {
+        outline: none;
+        background: none;
+        width: 100%;
+        border: 0;
+        box-shadow: none;
+        margin: 0;
+        color: inherit;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 20px;
+        padding-left: 60px;
+      }
+    }
+
+    &__submit {
+      input {
+        float: none;
+      }
+    }
+
+    &__remember {
+      color: #FFF;
+      font-size: 14px;
+      font-weight: 600 !important;
+      float: none !important;
+
+      input {
+        background: #FFF;
+        border: 0;
+      }
+
+      label {
+        color: inherit !important;
+        font-size: inherit !important;
+        font-weight: inherit !important;
+      }
+    }
+  }
+
+  #nav {
+    margin: 0;
+    padding: 0 0 40px;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+
+    a {
+      color: inherit;
     }
   }
 }
