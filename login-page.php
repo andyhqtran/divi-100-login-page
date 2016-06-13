@@ -332,8 +332,8 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $login_color && '' !== $login_color && $setting_fields['login-color']['default'] !== $login_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'.wp-core-ui .button-primary,
-				.wp-core-ui .button-primary:hover{
+				'.et_divi_100_custom_login_page--style-1 .divi-login__submit input.button,
+				.et_divi_100_custom_login_page--style-1 .divi-login__submit input.button:hover {
 					background-color: %1$s !important;
 					border-color: %1$s !important;
 					box-shadow: none !important;
@@ -346,7 +346,7 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $button_text_color && '' !== $button_text_color && $setting_fields['button-text-color']['default'] !== $button_text_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'.wp-core-ui .button-primary{
+				'.et_divi_100_custom_login_page--style-1 .divi-login__submit input.button {
 					color: %1$s !important;
 				}',
 				et_divi_100_sanitize_alpha_color( $button_text_color )

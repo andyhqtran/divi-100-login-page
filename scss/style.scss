@@ -93,6 +93,12 @@
     &__submit {
       input {
         float: none;
+        transition: 0.2s ease;
+
+        &:active {
+          margin: 0;
+          transform: scale(0.99);
+        }
       }
     }
 
@@ -136,5 +142,3 @@
 @import "partials/style-5";
 @import "partials/style-6";
 @import "partials/style-7";
-
-@import "vendors/ionicon";
