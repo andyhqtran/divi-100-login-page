@@ -51,7 +51,7 @@ class ET_Divi_100_Custom_Login_Page_Config {
 
 		return array(
 			'main_prefix'        => $main_prefix,
-			'plugin_name'        => __( 'Custom Login Page' ),
+			'plugin_name'        => __( 'Login Page' ),
 			'plugin_slug'        => $plugin_slug,
 			'plugin_id'          => "{$main_prefix}{$plugin_slug}",
 			'plugin_prefix'      => "{$main_prefix}{$plugin_slug}-",
@@ -88,7 +88,7 @@ class ET_Divi_100_Custom_Login_Page_Config {
 ET_Divi_100_Custom_Login_Page_Config::instance();
 
 /**
- * Load Custom Login Page
+ * Load Login Page
  */
 class ET_Divi_100_Custom_Login_Page {
 	/**
@@ -140,7 +140,7 @@ class ET_Divi_100_Custom_Login_Page {
 				'plugin_id'   => $this->config['plugin_id'],
 				'plugin_slug' => $this->config['plugin_slug'],
 				'preview_dir_url' => plugin_dir_url( __FILE__ ) . 'assets/img/preview/',
-				'title'       => __( 'Custom Login Page' ),
+				'title'       => __( 'Login Page' ),
 				'fields'      => $this->setting_fields(),
 				'button_save_text' => __( 'Save Changes' ),
 			);
