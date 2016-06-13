@@ -1,146 +1,45 @@
 .et_divi_100_custom_login_page--style-2 {
   background: #5A5A62;
-}
 
-@include style(2) {
-  form {
+  .divi-login {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    background: 0;
-    box-shadow: none;
-    padding: 0;
 
-    p {
-      &:first-child,
-      &:nth-child(2) {
-        order: 1;
+    &__input {
+      background: #FFFFFF;
+      width: 100%;
+      color: #BBB;
 
-        label {
-          position: relative;
-          display: block;
-          height: 60px;
-          line-height: 60px;
-          background: $white;
-          padding: 0 20px 0;
-          box-sizing: border-box;
-          color: #8E8E92;
-          font-weight: 400;
-          font-size: rem(16);
-          overflow: hidden;
-          transition: background 0.3s ease;
-
-          .icon {
-            color: #8E8E92;
-            margin: 0 20px 0 0;
-          }
-
-          &.focused {
-            color: transparent;
-          }
-        }
-      }
-
-      &:first-child {
-        border-radius: 4px 4px 0 0;
-
-        .input {
-          border-radius: 4px 4px 0 0;
-        }
-      }
-
-      &:nth-child(2) {
-        border-radius: 0 0 4px 4px;
-
-        .input {
-          margin-top: -1px;
-          border-radius: 0 0 4px 4px;
-
-          &:focus {
-            ~ {
-              background: #000;
-            }
-          }
-        }
-      }
-
-      &.forgetmenot {
-        order: 3;
-      }
-
-      &.submit {
-        order: 2;
-        margin: 0 0 20px;
-
-        #wp-submit {
-          background: #FE3367;
-          width: 100%;
-          height: auto;
-          border: 0;
-          border-radius: 0;
-          padding: 12px 20px;
-          box-shadow: none;
-          box-sizing: border-box;
-          font-size: rem(18);
-          font-weight: 600;
-          text-shadow: none;
-        }
+      &.focused {
+        color: #8E8E92
       }
     }
 
-    .input {
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: 0;
-      border: 1px solid rgba($white, 0.3);
-      box-shadow: none;
-      margin: 0;
-      padding: 18px 20px 18px 50px;
-      box-sizing: border-box;
-      color: #8E8E92;
-      font-size: rem(16);
-      font-weight: 600;
-    }
-  }
+    &__submit {
+      display: block;
+      width: 100%;
 
-  #nav {
-    margin: -18px 0 40px;
-    padding: 0;
-    color: #FFF;
-    font-size: rem(12);
-    font-weight: 600;
-    text-align: right;
-
-    a {
-      color: rgba($white, 0.8);
-
-      &:hover {
-        color: $white;
-      }
-    }
-  }
-
-  .forgetmenot {
-    display: block;
-    order: 2;
-    width: 100%;
-
-    label {
-      color: rgba($white, 0.8);
-      font-weight: 600;
-
-      &:hover {
-        color: $white;
-      }
-
-      input {
-        background: $white;
+      input.button {
+        display: block;
+        background: #FF3366;
+        width: 100%;
+        height: auto;
+        margin: 0 auto 20px;
+        padding: 12px 20px;
         border: 0;
-        border-radius: 2px;
+        border-radius: 0;
         box-shadow: none;
-        border-radius: 2px;
+        box-sizing: border-box;
+        color: #FFF;
+        font-size: 18px;
+        font-weight: 600;
+        text-shadow: none;
       }
+    }
+
+    &__remember {
+      order: 1;
+      margin-bottom: 20px !important;
     }
   }
 }
