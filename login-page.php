@@ -192,8 +192,8 @@ class ET_Divi_100_Custom_Login_Page {
 			'logo-url' => array(
 				'type'                 => 'url',
 				'id'                   => 'logo-url',
-				'label'                => __( 'Logo URL' ),
-				'placeholder'          => 'http://wordpress.org',
+				'label'                => __( 'Modify Logo URL' ),
+				'placeholder'          => esc_url( home_url() ),
 				'description'          => __( 'Use your own URL for logo on login screen' ),
 				'sanitize_callback'    => 'esc_url',
 			),
@@ -275,11 +275,12 @@ class ET_Divi_100_Custom_Login_Page {
 	function modify_login_logo_url( $url ) {
 		$custom_url = $this->utils->get_value( 'logo-url', false );
 
-		if ( $custom_url && '' !== $custom_url ) {
-			$url = esc_url( $custom_url );
+		if ( ! $custom_url || '' === $custom_url ) {
+			$settings = $this->setting_fields();
+			$custom_url =  $settings['logo-url']['placeholder'];
 		}
 
-		return $url;
+		return $custom_url;
 	}
 
 	/**
