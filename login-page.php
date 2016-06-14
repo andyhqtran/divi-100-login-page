@@ -149,7 +149,72 @@ class ET_Divi_100_Custom_Login_Page {
 		}
 	}
 
+	private function wp_default_styles() {
+		return array(
+			'background-color'        => '#f1f1f1',
+			'button-background-color' => '#0085ba',
+			'button-text-color'       => '#ffffff',
+		);
+	}
+
+	private function styles_defaults() {
+		$defaults = $this->wp_default_styles();
+
+		return array(
+			'' => $defaults,
+			'1' => array(
+				'background-color'        => '#d8634f',
+				'button-background-color' => '#ffffff',
+				'button-text-color'       => '#d8634f',
+			),
+			'2' => array(
+				'background-color'        => $defaults['background-color'],
+				'button-background-color' => '#fe3367',
+				'button-text-color'       => $defaults['button-text-color'],
+			),
+			'3' => array(
+				'background-color'        => $defaults['background-color'],
+				'button-background-color' => '#fe3367',
+				'button-text-color'       => $defaults['button-text-color'],
+			),
+			'4' => array(
+				'background-color'        => $defaults['background-color'],
+				'button-background-color' => '#fe3367',
+				'button-text-color'       => $defaults['button-text-color'],
+			),
+			'5' => array(
+				'background-color'        => $defaults['background-color'],
+				'button-background-color' => '#fe3367',
+				'button-text-color'       => $defaults['button-text-color'],
+			),
+			'6' => array(
+				'background-color'        => $defaults['background-color'],
+				'button-background-color' => '#fe3367',
+				'button-text-color'       => $defaults['button-text-color'],
+			),
+			'7' => array(
+				'background-color'        => $defaults['background-color'],
+				'button-background-color' => '#fe3367',
+				'button-text-color'       => $defaults['button-text-color'],
+			),
+		);
+	}
+
+	private function get_style_default( $style = '', $option = '' ) {
+		$wp_default_styles = $this->wp_default_styles();
+		$valid_options     = array_keys( $wp_default_styles );
+		$styles_defaults   = $this->styles_defaults();
+
+		if ( ! in_array( $option, $valid_options ) ) {
+			return false;
+		}
+
+		return isset( $styles_defaults[ $style ] ) && isset( $styles_defaults[ $style ][ $option ] ) ? $styles_defaults[ $style ][ $option ] : $wp_default_styles[ $option ];
+	}
+
 	private function setting_fields() {
+		$selected_style = $this->utils->get_value( 'style', '' );
+
 		return array(
 			'style' => array(
 				'type'                 => 'select',
@@ -167,7 +232,7 @@ class ET_Divi_100_Custom_Login_Page {
 				'label'                => __( 'Select Background Color' ),
 				'description'          => __( 'Use custom color for your login screen background' ),
 				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
-				'default'              => '#f1f1f1',
+				'default'              => $this->get_style_default( $selected_style, 'background-color' ),
 			),
 			'background-image' => array(
 				'type'                 => 'upload',
@@ -203,7 +268,7 @@ class ET_Divi_100_Custom_Login_Page {
 				'label'                => __( 'Select Button Background Color' ),
 				'description'          => __( 'Use custom color for background button' ),
 				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
-				'default'              => '#0085ba',
+				'default'              => $this->get_style_default( $selected_style, 'button-background-color' ),
 			),
 			'button-text-color' => array(
 				'type'                 => 'color',
@@ -211,7 +276,7 @@ class ET_Divi_100_Custom_Login_Page {
 				'label'                => __( 'Select Button Text Color' ),
 				'description'          => __( 'Use custom color text button' ),
 				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
-				'default'              => '#ffffff',
+				'default'              => $this->get_style_default( $selected_style, 'button-text-color' ),
 			),
 		);
 	}
