@@ -61,6 +61,7 @@ When opening an issue, please make sure you assign the proper label. For example
 - [Andy Tran](https://github.com/andyhqtran)
 - [Fikri Rasyid](https://github.com/fikrirasyid)
 - [Mario Maruffi](https://dribbble.com/MarioMaruffi)
+- [Unsplash](https://unsplash.com/)
 
 ## License
 Copyright © 2016 [Elegant Themes](http://elegantthemes.com). Code released undered the [GPL License](https://github.com/andyhqtran/divi-100-login-page/blob/master/LICENSE).
