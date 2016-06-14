@@ -1,1 +1,70 @@
-@include style(5) {}
+.et_divi_100_custom_login_page--style-5 {
+  background: #36363E;
+
+  div#login {
+    max-width: 540px;
+
+    h1 {
+      display: block;
+      width: 100%;
+      text-align: center;
+
+      a {
+        background-image: none, url("../img/logo-alt.svg");
+      }
+    }
+  }
+
+  .divi-login {
+    display: flex;
+    flex-wrap: wrap;
+    background: #FFF;
+    padding: 90px;
+
+    &__input {
+      width: 100%;
+      border-bottom: 1px solid #D5D9E0;
+      margin: 0 0 20px;
+      color: #A2ABC0;
+
+      &.focused {
+        color: #1E2431;
+      }
+
+      .icon {
+        color: #A2ABC0;
+      }
+    }
+
+    &__submit {
+      display: block;
+      width: 100%;
+
+      input.button {
+        display: block;
+        background: #FF3366;
+        width: 100%;
+        height: auto;
+        margin: 0 auto 20px;
+        padding: 12px 20px;
+        border: 0;
+        border-radius: 100px;
+        box-shadow: none;
+        box-sizing: border-box;
+        color: #FFF;
+        font-size: 18px;
+        font-weight: 600;
+        text-shadow: none;
+      }
+    }
+
+    &__remember {
+      margin-bottom: 40px !important;
+      color: #A2ABC0;
+
+      input {
+        border: 1px solid #D5D9E0;
+      }
+    }
+  }
+}

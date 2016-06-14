@@ -1,1 +1,51 @@
-@include style(7) {}
+.et_divi_100_custom_login_page--style-7 {
+  background: #282939;
+
+  .divi-login {
+    display: flex;
+    flex-wrap: wrap;
+
+    &__input {
+      background: rgba(#FFF, 0.15);
+      width: 100%;
+      border-radius: 4px;
+      margin: 0 0 20px;
+      padding: 0 20px;
+      color: #FFF;
+
+      .icon {
+        left: 40px;
+        color: rgba(#FFF, 0.4);
+      }
+    }
+
+    &__submit {
+      display: block;
+      flex-basis: 50%;
+
+      input.button {
+        display: block;
+        background: #FF3366;
+        height: auto;
+        margin: 0 0 0 auto;
+        padding: 12px 20px;
+        border: 0;
+        border-radius: 4px;
+        box-shadow: none;
+        box-sizing: border-box;
+        color: #FFF;
+        font-size: 18px;
+        font-weight: 600;
+        text-shadow: none;
+      }
+    }
+
+    &__remember {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      flex-basis: 50%;
+      margin-bottom: 0 !important;
+    }
+  }
+}

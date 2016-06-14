@@ -108,4 +108,8 @@ jQuery(document).ready(function ($) {
       }
     });
   }
+
+  if ($('.et_divi_100_custom_login_page--style-5').length >= 1 || $('.et_divi_100_custom_login_page--style-6').length >= 1) {
+    $('div#login h1').prependTo('.divi-login');
+  }
 });
