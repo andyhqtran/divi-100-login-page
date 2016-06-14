@@ -300,7 +300,7 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $background_color && '' !== $background_color && $setting_fields['background-color']['default'] !== $background_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'html, body {
+				'html, body.et_divi_100_custom_login_page {
 					background-color: %s !important;
 				}',
 				esc_url( $background_color )
@@ -310,7 +310,7 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $background_image_src && '' !== $background_image_src ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'body {
+				'body.et_divi_100_custom_login_page {
 					background: url( "%s" ) center center no-repeat !important;
 					background-size: cover !important;
 				}',
@@ -333,8 +333,8 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $button_background_color && '' !== $button_background_color && $setting_fields['button-background-color']['default'] !== $button_background_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'.et_divi_100_custom_login_page--style-1 .divi-login__submit input.button,
-				.et_divi_100_custom_login_page--style-1 .divi-login__submit input.button:hover {
+				'.et_divi_100_custom_login_page .divi-login__submit input.button,
+				.et_divi_100_custom_login_page .divi-login__submit input.button:hover {
 					background-color: %1$s !important;
 					border-color: %1$s !important;
 					box-shadow: none !important;
@@ -347,7 +347,7 @@ class ET_Divi_100_Custom_Login_Page {
 		if ( $button_text_color && '' !== $button_text_color && $setting_fields['button-text-color']['default'] !== $button_text_color ) {
 			$print_css_status = true;
 			$css .= sprintf(
-				'.et_divi_100_custom_login_page--style-1 .divi-login__submit input.button {
+				'.et_divi_100_custom_login_page .divi-login__submit input.button {
 					color: %1$s !important;
 				}',
 				et_divi_100_sanitize_alpha_color( $button_text_color )
