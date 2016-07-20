@@ -20,6 +20,7 @@ jQuery(document).ready(function ($) {
           .parent()
           .parent()
           .addClass('divi-login__input--user');
+        $(this).attr('placeholder', 'Username');
       } else if ($(this).is('#user_pass')) {
         $(this)
           .parent()
@@ -29,6 +30,7 @@ jQuery(document).ready(function ($) {
           .parent()
           .parent()
           .addClass('divi-login__input--password');
+        $(this).attr('placeholder', 'Password');
       } else if ($(this).is('#user_email')) {
         $(this)
           .parent()
@@ -38,6 +40,7 @@ jQuery(document).ready(function ($) {
           .parent()
           .parent()
           .addClass('divi-login__input--email');
+        $(this).attr('placeholder', 'Email Address');
       }
 
       /**
